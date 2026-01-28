@@ -2,6 +2,7 @@
 #define CHIP8_H
 
 #include <stdint.h>
+#include <SDL.h>
 
 #define VIDEO_WIDTH 64
 #define VIDEO_HEIGHT 32

@@ -2,7 +2,7 @@
 #define PLATFORM_H
 
 #include <stdint.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 void platform_init(char const* title, int windowWidth, int windowHeight, int textureWidth, int textureHeight);
 void platform_cleanup();

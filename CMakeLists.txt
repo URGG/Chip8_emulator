@@ -3,18 +3,18 @@ project(Chip8_Emulator C)
 
 set(CMAKE_C_STANDARD 11)
 
-# Tell CMake to look in the src directory
-include_directories(src)
+# Tell CMake where Homebrew lives on Apple Silicon
+list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew")
+
 find_package(SDL2 REQUIRED)
 
-include_directories(${SDL2_INCLUDE_DIRS})
-# Add your source files
 add_executable(Chip8_Emulator
         src/main.c
         src/chip8.c
-        src/chip8.c
+        src/platform.c
+        src/chip8.h
         src/platform.h
-
 )
 
-target_link_libraries(Chip8_Emulator ${SDL2_LIBRARIES})
+# Link using the modern SDL2 targets
+target_link_libraries(Chip8_Emulator SDL2::SDL2)
