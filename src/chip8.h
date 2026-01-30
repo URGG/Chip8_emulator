@@ -6,6 +6,7 @@
 
 #define VIDEO_WIDTH 64
 #define VIDEO_HEIGHT 32
+#define MEMORY_SIZE 4096
 
 typedef struct {
     uint8_t  memory[4096];

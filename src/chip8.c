@@ -21,21 +21,37 @@ void init_cpu(Chip8 *cpu) {
 }
 
 int load_rom(Chip8 *cpu, const char *filename) {
+    // 1. Open file
     FILE* file = fopen(filename, "rb");
-    if (!file) return -1;
+    if (file == NULL) {
+        perror("Error detail"); // This prints WHY it failed to the console
+        return -1;
+    }
 
+    // 2. Get file size
     fseek(file, 0, SEEK_END);
     long size = ftell(file);
     fseek(file, 0, SEEK_SET);
 
+    printf("ROM Size: %ld bytes\n", size); // Debug print
+
+    // 3. Check if ROM fits in memory (4096 - 512 byte offset)
     if (size > (4096 - 0x200)) {
+        printf("Error: ROM is too big!\n");
         fclose(file);
         return -1;
     }
 
-    fread(&cpu->memory[0x200], 1, size, file);
+    // 4. Read into memory starting at 0x200
+    size_t bytes_read = fread(&cpu->memory[0x200], 1, size, file);
+    if (bytes_read != size) {
+        printf("Error: Failed to read the full file.\n");
+        fclose(file);
+        return -1;
+    }
+
     fclose(file);
-    return 0;
+    return 0; // Success!
 }
 
 void cycle(Chip8 *cpu) {
