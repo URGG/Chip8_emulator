@@ -22,32 +22,29 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // 3. Initialize the Platform (Window Scale: 10x)
+
     int video_scale = 10;
     platform_init("Gemini Chip-8 Emulator",
                   VIDEO_WIDTH * video_scale,
                   VIDEO_HEIGHT * video_scale,
                   VIDEO_WIDTH, VIDEO_HEIGHT);
 
-    // 4. The Main Execution Loop
+
     int quit = 0;
     while (!quit) {
-        // A. Handle User Input
+
         quit = platform_process_input(cpu.keypad);
 
-        // B. Run CPU Cycles
-        // We run roughly 10 instructions every 16ms (60Hz)
-        // to approximate a 600Hz clock speed.
+
         for (int i = 0; i < 10; i++) {
             cycle(&cpu);
         }
 
-        // C. Update Timers (should run at 60Hz)
+
         if (cpu.delay_timer > 0) cpu.delay_timer--;
         if (cpu.sound_timer > 0) cpu.sound_timer--;
 
-        // D. Update Screen
-        // We pass the internal video buffer to SDL to draw
+
         platform_update(cpu.video, sizeof(cpu.video[0]) * VIDEO_WIDTH);
 
 
