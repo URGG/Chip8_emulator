@@ -12,11 +12,11 @@ int main(int argc, char** argv) {
 
     const char* rom_filename = argv[1];
 
-    // 1. Initialize the Hardware
+
     Chip8 cpu;
     init_cpu(&cpu);
 
-    // 2. Load the ROM
+
     if (load_rom(&cpu, rom_filename) != 0) {
         printf("Error: Could not load ROM file: %s\n", rom_filename);
         return 1;
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
         // We pass the internal video buffer to SDL to draw
         platform_update(cpu.video, sizeof(cpu.video[0]) * VIDEO_WIDTH);
 
-        // E. Maintain Frame Rate (approx 60 FPS)
+
         SDL_Delay(16);
     }
 
