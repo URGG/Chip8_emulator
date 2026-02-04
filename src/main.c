@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 
 
     int video_scale = 10;
-    platform_init("Gemini Chip-8 Emulator",
+    platform_init(" Chip-8 Emulator",
                   VIDEO_WIDTH * video_scale,
                   VIDEO_HEIGHT * video_scale,
                   VIDEO_WIDTH, VIDEO_HEIGHT);
@@ -43,6 +43,7 @@ int main(int argc, char** argv) {
 
         if (cpu.delay_timer > 0) cpu.delay_timer--;
         if (cpu.sound_timer > 0) cpu.sound_timer--;
+
 
 
         platform_update(cpu.video, sizeof(cpu.video[0]) * VIDEO_WIDTH);
